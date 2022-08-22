@@ -1,0 +1,32 @@
+default:
+  suites:
+    default:
+      paths:
+        - '%paths.base%/features'
+      contexts:
+        - FeatureContext
+        - Drupal\DrupalExtension\Context\DrupalContext
+        - Drupal\DrupalExtension\Context\MinkContext
+        - Drupal\DrupalExtension\Context\MessageContext
+        - Drupal\DrupalExtension\Context\DrushContext
+  extensions:
+    DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+    Drupal\MinkExtension:
+      ajax_timeout: 15
+      goutte: ~
+      browser_name: chrome
+      files_path: “%paths.base%/media”
+      javascript_session: default
+      selenium2: ~
+      base_url: http://automationpractice.com/index.php
+      sessions:
+        default:
+          chrome:
+            api_url: "http://localhost:9222"
+    Drupal\DrupalExtension:
+      blackbox: ~
+    Bex\Behat\ScreenshotExtension:
+      screenshot_taking_mode: failed_steps
+      image_drivers:
+        local:
+          screenshot_directory: "%paths.base%/media"
